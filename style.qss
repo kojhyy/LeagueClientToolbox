@@ -17,7 +17,11 @@ QLabel {
 }
 
 QPushButton {
-    background-color: #91171F;
+    background-color: #c64951;
     padding: 20px;
     font-size: 18px;
+}
+
+QHBoxLayout {
+    background-color: #232324;
 }
