@@ -10,11 +10,13 @@ class Widget(QWidget):
         super().__init__()
 
         # création de la liste d'onglets sur le côté
-        menu_widget = QListWidget()
+        self.menu_widget = QListWidget()
         for i in range(10):
             item = QListWidgetItem(f"Item {i}")
             item.setTextAlignment(Qt.AlignCenter)
-            menu_widget.addItem(item)
+            self.menu_widget.addItem(item)
+        
+        self.menu_widget.itemClicked.connect(self.change_page)
 
         # création de 2 éléments
         text_widget = QLabel("test")
@@ -24,32 +26,25 @@ class Widget(QWidget):
         content_layout.addWidget(text_widget)
         content_layout.addWidget(button)
 
-        main_widget = QWidget()
-        main_widget.setLayout(content_layout)
+        self.main_widget = QWidget()
+        self.main_widget.setLayout(content_layout)
 
-        layout = QHBoxLayout()
-        layout.addWidget(menu_widget, 1)
-        layout.addWidget(main_widget, 4)
+        self.layout = QHBoxLayout()
+        self.layout.addWidget(self.menu_widget, 1)
+        self.layout.addWidget(self.main_widget, 4)
 
-        self.setLayout(layout)
+        self.setLayout(self.layout)
 
-        
-
-    #     self.button = QtWidgets.QPushButton("Click me!")
-    #     self.text = QtWidgets.QLabel("Hello World",
-    #                                  alignment=QtCore.Qt.AlignCenter)
-
-    #     self.layout = QtWidgets.QVBoxLayout(self)
-    #     self.layout.addWidget(self.text)
-    #     self.layout.addWidget(self.button)
-
-    #     self.button.clicked.connect(self.magic)
 
     @Slot()
-    def magic(self):
-        
-        text_widget = QLabel("test")
-        button = QPushButton("bouton")
+    def change_page(self):
+        match (self.menu_widget.currentRow()):
+            case 0:
+                print(0)
+            case 1:
+                print(1)
+            case _:
+                print("erreur")
 
 
 if __name__ == "__main__":
